@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ReadySteadyMunch</string>
+    <string name="title_activity_ingredients_list">IngredientsList</string>
 </resources>
