@@ -13,16 +13,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
 
 
-      public void sendMessage(View view){
-          EditText editText = findViewById(R.id.ingredientsTxt);
-          String message = editText.getText().toString();
-          Intent intent = new Intent(this, DisplayMessageActivity.class);
-          intent.putExtra("EXTRA_MESSAGE", message);
-          startActivity(intent);
+            public void sendMessage (View view) {
+            EditText editText = findViewById(R.id.ingredientsTxt);
+            String message = editText.getText().toString();
+            Intent intent = new Intent(this, DisplayMessageActivity.class);
+            intent.putExtra("EXTRA_MESSAGE", message);
+            startActivity(intent);
+        }
 
-
-      }
-
-}
+    }
