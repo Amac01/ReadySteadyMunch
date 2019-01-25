@@ -13,23 +13,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
-//        Intent intent = getIntent();
-//
-//        String message = intent.getStringExtra(EXTRA_MESSAGE);
-//        TextView textView = findViewById(R.id.addIngredients);
-//        textView.setText(message);
-
-
-//        final Button DisplayMessageActivityBtn = (Button)findViewById(R.id.DisplayMessageActivityBtn);
-//        DisplayMessageActivityBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent startIntent = new Intent(getApplicationContext(), DisplayMessageActivity.class);
-//            }
-//        });
-
-    }
 
 
       public void sendMessage(View view){
