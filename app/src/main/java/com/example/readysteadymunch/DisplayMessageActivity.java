@@ -32,15 +32,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
         //get the Intent that started this activity and extract the string
           Intent intent = getIntent();
           String message = intent.getStringExtra("EXTRA_MESSAGE");
+        System.out.println(message);
 
 //          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
 //          ArrayList<String> ingredientsToArray = splitter.setString(message);
 //          String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
 
         //API call
+        //apples%2Cflour%2Ceggs"
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=apples%2Cflour%2Ceggs";
+        String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=" + message;
         String url = ingredientCall ; //+ ingredients
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
@@ -73,7 +75,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("X-RapidAPI-Key", "");
+                headers.put("X-RapidAPI-Key", "706acb9b8fmsh417662e132c35d1p1347afjsn89cf66a51d20");
                 return headers;
             }
         };
