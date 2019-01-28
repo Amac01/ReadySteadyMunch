@@ -4,7 +4,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -14,12 +17,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
     public RecipeListAdapter(List<Recipe> recipe_list){this.recipe_list = recipe_list;}
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView recipeTitle;
+        public ImageView recipeImage;
         public TextView usedIngredientCount;
         public TextView missedIngredientCount;
         public TextView recipeLikes;
         public ViewHolder(View v){
             super(v);
+
             recipeTitle = (TextView) v.findViewById(R.id.recipe_title);
+            recipeImage = (ImageView) v.findViewById(R.id.recipe_image);
             usedIngredientCount = (TextView) v.findViewById(R.id.usedIngredientCount);
             missedIngredientCount= (TextView) v.findViewById(R.id.missedIngredientCount);
             recipeLikes= (TextView) v.findViewById(R.id.recipeLikes);
@@ -35,6 +41,12 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
     public void onBindViewHolder (ViewHolder holder, int position) {
         Recipe recipe = recipe_list.get(position);
         holder.recipeTitle.setText(recipe.getTitle());
+
+        Picasso.get().load(recipe.getImage()).
+                resize(340, 200)
+                .into(holder.recipeImage);
+
+
         holder.usedIngredientCount.setText(recipe.getUsedIngredientCount());
         holder.missedIngredientCount.setText(recipe.getMissedIngredientCount());
         holder.recipeLikes.setText(recipe.getLikes());

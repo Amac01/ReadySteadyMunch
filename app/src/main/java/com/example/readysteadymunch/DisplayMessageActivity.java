@@ -57,7 +57,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Response is:" + response.substring(0, 500));
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             System.out.println("Array length is " + jsonArray.length());
