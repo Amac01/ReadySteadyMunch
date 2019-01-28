@@ -28,14 +28,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
-
         //get the Intent that started this activity and extract the string
           Intent intent = getIntent();
           String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-//          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
-//          ArrayList<String> ingredientsToArray = splitter.setString(message);
-//          String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
+            // TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
+            // ArrayList<String> ingredientsToArray = splitter.setString(message);
+            // String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
 
         //API call
 
@@ -78,7 +77,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             }
         };
         queue.add(stringRequest);
-//        // Capture the layout's TextView and set the string as its text
+        // Capture the layout's TextView and set the string as its text
 
         TextView outputsTxt = findViewById(R.id.outputsTxt);
         outputsTxt.setText(message);
