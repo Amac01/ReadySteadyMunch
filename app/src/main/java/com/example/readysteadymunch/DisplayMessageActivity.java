@@ -3,9 +3,9 @@ package com.example.readysteadymunch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,35 +13,29 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class DisplayMessageActivity extends AppCompatActivity {
+    public List<Recipe> recipe_list = new ArrayList<>(); // Variable to store our recipes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
+
+        //get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-        /*
-
-        TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
-        String ingredientsToArray = message;
-        String ingredients = (String) TextUtils.join("%2C", Collections.singleton(ingredientsToArray));
-        splitter.setString(message);
-
-        */
-
         //API call
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=" + message;
         String url = ingredientCall;
@@ -51,14 +45,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Response is:" + response.substring(0, 950));
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             System.out.println("Array length is " + jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject item = (JSONObject) jsonArray.get(i);
-                                String itemName = item.getString("title");
-                                System.out.println(itemName);
+                                recipe_list.add(new Recipe(item.getString("id"), item.getString("title"), item.getString("image"), item.getString("usedIngredientCount"), item.getString("missedIngredientCount"), item.getString("likes")));
+                                System.out.println(recipe_list.get(0).getImage());
+                                recycle_view_setup(); // Sets up recycle view adapter
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -80,10 +74,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        queue.add(stringRequest);
-//        // Capture the layout's TextView and set the string as its text
+        // Pass the API call into a Recipe List
 
-        TextView outputsTxt = findViewById(R.id.outputsTxt);
-        outputsTxt.setText(message);
+        queue.add(stringRequest);
+
+
+    }
+    protected void recycle_view_setup(){
+        // Recycler View
+        System.out.println(recipe_list.size());
+        RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(recipe_list); // Add the list
+        RecyclerView recipe_view = findViewById(R.id.recipe_by_ingredient);
+        recipe_view.setHasFixedSize(true);
+        recipe_view.setLayoutManager(new LinearLayoutManager(this));
+        recipe_view.setAdapter(recipe_list_adapter);
     }
 }
