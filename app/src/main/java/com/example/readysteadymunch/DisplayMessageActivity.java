@@ -19,11 +19,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
 public class DisplayMessageActivity extends AppCompatActivity {
+    public List<Recipe> recipe_list = new ArrayList<>(); // Variable to store our recipes
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +63,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
                             System.out.println("Array length is " + jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject item = (JSONObject) jsonArray.get(i);
-                                String itemName = item.getString("title");
-                                System.out.println(itemName);
+                                recipe_list.add(new Recipe(item.getString("id"), item.getString("title"), item.getString("image"), item.getString("usedIngredientCount"), item.getString("missedIngredientCount"), item.getString("likes")));
+                                System.out.println(recipe_list.get(0).getImage());
+                                recycle_view_setup(); // Sets up recycle view adapter
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -87,8 +91,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         queue.add(stringRequest);
 
+
+    }
+    protected void recycle_view_setup(){
         // Recycler View
-        RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(); // Add the list
+        System.out.println(recipe_list.size());
+        RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(recipe_list); // Add the list
         RecyclerView recipe_view = findViewById(R.id.recipe_by_ingredient);
         recipe_view.setHasFixedSize(true);
         recipe_view.setLayoutManager(new LinearLayoutManager(this));

@@ -1,14 +1,14 @@
 package com.example.readysteadymunch;
 
 public class Recipe {
-    long ID;
+    String ID;
     String title;
     String image;
-    int usedIngredientCount;
-    int missedIngredientCount;
-    int likes;
+    String usedIngredientCount;
+    String missedIngredientCount;
+    String likes;
 
-    public Recipe(long ID, String title, String image, int usedIngredientCount, int missedIngredientCount, int likes) {
+    public Recipe(String ID, String title, String image, String usedIngredientCount, String missedIngredientCount, String likes) {
         this.ID = ID;
         this.title = title;
         this.image = image;
@@ -17,11 +17,11 @@ public class Recipe {
         this.likes = likes;
     }
 
-    public long getID() {
+    public String getID() {
         return ID;
     }
 
-    public void setID(long ID) {
+    public void setID(String ID) {
         this.ID = ID;
     }
 
@@ -41,27 +41,27 @@ public class Recipe {
         this.image = image;
     }
 
-    public int getUsedIngredientCount() {
+    public String getUsedIngredientCount() {
         return usedIngredientCount;
     }
 
-    public void setUsedIngredientCount(int usedIngredientCount) {
+    public void setUsedIngredientCount(String usedIngredientCount) {
         this.usedIngredientCount = usedIngredientCount;
     }
 
-    public int getMissedIngredientCount() {
+    public String getMissedIngredientCount() {
         return missedIngredientCount;
     }
 
-    public void setMissedIngredientCount(int missedIngredientCount) {
+    public void setMissedIngredientCount(String missedIngredientCount) {
         this.missedIngredientCount = missedIngredientCount;
     }
 
-    public int getLikes() {
+    public String getLikes() {
         return likes;
     }
 
-    public void setLikes(int likes) {
+    public void setLikes(String likes) {
         this.likes = likes;
     }
 }

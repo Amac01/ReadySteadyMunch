@@ -19,15 +19,15 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
         public TextView recipeLikes;
         public ViewHolder(View v){
             super(v);
-            recipeTitle = <>;
-            usedIngredientCount = <>;
-            missedIngredientCount= <>;
-            recipeLikes= <>;
+            recipeTitle = (TextView) v.findViewById(R.id.recipe_title);
+            usedIngredientCount = (TextView) v.findViewById(R.id.usedIngredientCount);
+            missedIngredientCount= (TextView) v.findViewById(R.id.missedIngredientCount);
+            recipeLikes= (TextView) v.findViewById(R.id.recipeLikes);
         }
     }
     @Override
     public RecipeListAdapter.ViewHolder onCreateViewHolder (ViewGroup parent, int viewType){
-        TextView v = (TextView) LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_text_view, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.recipe_text_view, parent, false);
         return new ViewHolder(v);
     }
 
