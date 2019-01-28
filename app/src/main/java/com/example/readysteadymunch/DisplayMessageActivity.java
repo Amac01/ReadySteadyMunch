@@ -3,6 +3,7 @@ package com.example.readysteadymunch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +18,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,23 +37,24 @@ public class DisplayMessageActivity extends AppCompatActivity {
           String message = intent.getStringExtra("EXTRA_MESSAGE");
         System.out.println(message);
 
-//          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
-//          ArrayList<String> ingredientsToArray = splitter.setString(message);
-//          String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
+          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
+          String ingredientsToArray = message;
+        splitter.setString(message);
+        String ingredients = (String) TextUtils.join("%2C", Collections.singleton(ingredientsToArray)); // join %2C
 
         //API call
         //apples%2Cflour%2Ceggs"
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=" + message;
-        String url = ingredientCall ; //+ ingredients
+        String url = ingredientCall ; //+ ingredientnulls
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Response is:" + response.substring(0, 500));
+                        System.out.println("Response is:" + response.substring(0, 950));
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             System.out.println("Array length is " + jsonArray.length());
