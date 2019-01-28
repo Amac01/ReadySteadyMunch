@@ -17,9 +17,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,33 +28,30 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-        //get the Intent that started this activity and extract the string
-          Intent intent = getIntent();
-          String message = intent.getStringExtra("EXTRA_MESSAGE");
+        /*
 
         TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(',');
         String ingredientsToArray = message;
-        String ingredients = (String) TextUtils.join("%2C", Collections.singleton(ingredientsToArray)); // join %2C
+        String ingredients = (String) TextUtils.join("%2C", Collections.singleton(ingredientsToArray));
         splitter.setString(message);
 
-
-//          TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
-//          ArrayList<String> ingredientsToArray = splitter.setString(message);
-//          String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
+        */
 
         //API call
 
         RequestQueue queue = Volley.newRequestQueue(this);
         String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=" + message;
-        String url = ingredientCall ; //+ ingredients
+        String url = ingredientCall;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Response is:" + response.substring(0, 500));
+                        System.out.println("Response is:" + response.substring(0, 950));
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             System.out.println("Array length is " + jsonArray.length());
