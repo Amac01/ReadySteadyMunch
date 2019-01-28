@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,11 +13,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,24 +30,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
+
         //get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-        // Capture the layout's TextView and set the string as its text
-        TextView outputsTxt = findViewById(R.id.outputsTxt); // This will be removed
-        outputsTxt.setText(message);
-
-        /*
-        TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
-        ArrayList<String> ingredientsToArray = splitter.setString(message);
-        String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
-        */
-
         //API call
         RequestQueue queue = Volley.newRequestQueue(this);
-        String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=apples%2Cflour%2Ceggs";
-        String url = ingredientCall ; //+ ingredients
+        String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=" + message;
+        String url = ingredientCall;
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
