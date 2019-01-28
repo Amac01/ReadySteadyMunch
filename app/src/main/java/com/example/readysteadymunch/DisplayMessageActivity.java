@@ -3,6 +3,8 @@ package com.example.readysteadymunch;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -29,15 +31,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
 
         //get the Intent that started this activity and extract the string
-          Intent intent = getIntent();
-          String message = intent.getStringExtra("EXTRA_MESSAGE");
+        Intent intent = getIntent();
+        String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-            // TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
-            // ArrayList<String> ingredientsToArray = splitter.setString(message);
-            // String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
+        // Capture the layout's TextView and set the string as its text
+        TextView outputsTxt = findViewById(R.id.outputsTxt); // This will be removed
+        outputsTxt.setText(message);
+
+        /*
+        TextUtils.SimpleStringSplitter splitter = new TextUtils.SimpleStringSplitter(",");
+        ArrayList<String> ingredientsToArray = splitter.setString(message);
+        String ingredients = TextUtils.join("%2C", ingredientsToArray); // join %2C
+        */
 
         //API call
-
         RequestQueue queue = Volley.newRequestQueue(this);
         String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=apples%2Cflour%2Ceggs";
         String url = ingredientCall ; //+ ingredients
@@ -76,10 +83,15 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        queue.add(stringRequest);
-        // Capture the layout's TextView and set the string as its text
+        // Pass the API call into a Recipe List
 
-        TextView outputsTxt = findViewById(R.id.outputsTxt);
-        outputsTxt.setText(message);
+        queue.add(stringRequest);
+
+        // Recycler View
+        RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(); // Add the list
+        RecyclerView recipe_view = findViewById(R.id.recipe_by_ingredient);
+        recipe_view.setHasFixedSize(true);
+        recipe_view.setLayoutManager(new LinearLayoutManager(this));
+        recipe_view.setAdapter(recipe_list_adapter);
     }
 }
