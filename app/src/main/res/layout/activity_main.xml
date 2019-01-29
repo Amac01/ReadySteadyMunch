@@ -5,7 +5,10 @@
     android:id="@+id/addIngredients"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/rs_munch"
+    android:tileMode="repeat">
+
 
     <Button
         android:id="@+id/buttonBtn"
@@ -30,21 +33,20 @@
         android:layout_width="match_parent"
         android:layout_height="149dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Enter your ingredients here"
         android:inputType="text"
-        android:text=""
+        android:textColorHint="#fff"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.102" />
+        app:layout_constraintVertical_bias="0.105"
+        tools:background="@android:color/white" />
 
 </android.support.constraint.ConstraintLayout>
