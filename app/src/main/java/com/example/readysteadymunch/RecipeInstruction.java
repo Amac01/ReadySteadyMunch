@@ -3,15 +3,16 @@ package com.example.readysteadymunch;
 import java.util.ArrayList;
 
 public class RecipeInstruction {
-    String title;
-    String image;
-    boolean isVegetarian;
-    boolean isVegan;
-    boolean isGlutenFree;
-    boolean isDairyFree;
-    int Servings;
-    ArrayList<String> ingredients = new ArrayList<>();
-    ArrayList<String> instructions = new ArrayList<>();
+    String title; // Done
+    String image; // Done
+    boolean isVegetarian; // Done
+    boolean isVegan; // Done
+    boolean isGlutenFree; // Done
+    boolean isDairyFree; // Done
+    int Servings; // Done
+    ArrayList<String> ingredients = new ArrayList<>(); // Done
+    ArrayList<String> instructions = new ArrayList<>(); // Done
+    int readyInMinutes; // Done
 
     public String getTitle() {
         return title;
@@ -83,5 +84,13 @@ public class RecipeInstruction {
 
     public void addInstructions(String instruction) {
         instructions.add(instruction);
+    }
+
+    public int getReadyInMinutes() {
+        return readyInMinutes;
+    }
+
+    public void setReadyInMinutes(int readyInMinutes) {
+        this.readyInMinutes = readyInMinutes;
     }
 }
