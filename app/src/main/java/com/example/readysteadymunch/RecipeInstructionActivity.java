@@ -44,20 +44,11 @@ public class RecipeInstructionActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        // System.out.println(response);
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            System.out.println("Array length is " + jsonArray.length()); // Debugging purposes
+                            // System.out.println("Array length is " + jsonArray.length()); // Debugging purposes
                             jsonToJava(jsonArray); // Handles wrapping into Java objects
-
-
-                            /*
-
-                            for (int i = 0; i < jsonArray.length(); i++){
-                                JSONObject item = (JSONObject) jsonArray.get(i);
-                            }
-                            */
-
                             setUpViews(); // This sets up the views
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -89,6 +80,7 @@ public class RecipeInstructionActivity extends AppCompatActivity {
     protected void jsonToJava(JSONArray json_array) {
         try {
             JSONObject item = (JSONObject) json_array.get(0);
+
             recipe_instructions.setTitle(item.getString("title")); // Set recipe title
             recipe_instructions.setImage(item.getString("image")); // Set recipe image
             recipe_instructions.setReadyInMinutes(item.getInt("readyInMinutes")); // Set recipe ready in minutes
@@ -100,7 +92,7 @@ public class RecipeInstructionActivity extends AppCompatActivity {
 
             JSONArray ingredients_array = item.getJSONArray("extendedIngredients"); // Returns ingredients array
             // Adds ingredients to recipe_instructions arraylist
-            for (int i = 0; i < item.length(); i++){
+            for (int i = 0; i < ingredients_array.length(); i++){
                 JSONObject individual_ingredient = (JSONObject) ingredients_array.get(i);
                 String ingredient = individual_ingredient.getString("originalString");
                 recipe_instructions.addIngredients(ingredient);
@@ -108,11 +100,11 @@ public class RecipeInstructionActivity extends AppCompatActivity {
 
             // Adds instructions to recipe_instructions arraylist
 
-            JSONArray analysedInstructions = item.getJSONArray("analyzedIngredients");
+            JSONArray analysedInstructions = item.getJSONArray("analyzedInstructions");
             JSONObject name_and_steps = (JSONObject) analysedInstructions.get(0);
             JSONArray steps = name_and_steps.getJSONArray("steps");
 
-            for (int i = 0; i < item.length(); i++){
+            for (int i = 0; i < steps.length(); i++){
                 JSONObject individual_instruction = (JSONObject) steps.get(0);
                 String instruction = individual_instruction.getString("step");
                 recipe_instructions.addInstructions(instruction);

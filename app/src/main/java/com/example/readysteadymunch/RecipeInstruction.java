@@ -93,4 +93,5 @@ public class RecipeInstruction {
     public void setReadyInMinutes(int readyInMinutes) {
         this.readyInMinutes = readyInMinutes;
     }
+
 }
