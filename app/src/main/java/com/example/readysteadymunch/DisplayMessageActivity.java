@@ -47,13 +47,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            System.out.println("Array length is " + jsonArray.length());
+                            // System.out.println("Array length is " + jsonArray.length());
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject item = (JSONObject) jsonArray.get(i);
                                 recipe_list.add(new Recipe(item.getString("id"), item.getString("title"), item.getString("image"), item.getString("usedIngredientCount"), item.getString("missedIngredientCount"), item.getString("likes")));
-                                System.out.println(recipe_list.get(0).getImage());
-                                recycle_view_setup(); // Sets up recycle view adapter
+                                // System.out.println(recipe_list.get(0).getImage());
+
                             }
+                            recycle_view_setup(); // Sets up recycle view adapter
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

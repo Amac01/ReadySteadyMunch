@@ -1,5 +1,6 @@
 package com.example.readysteadymunch;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -24,21 +25,25 @@ public class RecipeInstructions extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_instructions);
-
-        long id = 479101; // This will come from the previous activity
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("EXTRA_MESSAGE");
+        System.out.println(id);
 
         // API Call
         RequestQueue queue = Volley.newRequestQueue(this);
-        String start_url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/";
-        String recipe_id = "{" + id + "}";
-        String parameters = "/information?includeNutrition=true";
+        String start_url = "https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/informationBulk?";
+        String recipe_id = "ids=" + id;
+        String parameters = "&includeNutrition=true";
         String complete_url= start_url + recipe_id + parameters;
+
+        // Current API: https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/informationBulk?ids=835677&includeNutrition=true
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, complete_url,
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             System.out.println("Array length is " + jsonArray.length());
@@ -66,6 +71,5 @@ public class RecipeInstructions extends AppCompatActivity {
         };
 
         queue.add(stringRequest);
-
     }
 }

@@ -1,5 +1,7 @@
 package com.example.readysteadymunch;
 
+import android.app.Application;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +25,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
         public TextView recipeLikes;
         public ViewHolder(View v){
             super(v);
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+
+                }
+            });
 
             recipeTitle = (TextView) v.findViewById(R.id.recipe_title);
             recipeImage = (ImageView) v.findViewById(R.id.recipe_image);
@@ -42,6 +51,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
         Recipe recipe = recipe_list.get(position);
         holder.recipeTitle.setText(recipe.getTitle());
 
+
         Picasso.get().load(recipe.getImage()).
                 resize(340, 200)
                 .into(holder.recipeImage);
@@ -49,8 +59,20 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
         holder.usedIngredientCount.setText(recipe.getUsedIngredientCount());
         holder.missedIngredientCount.setText(recipe.getMissedIngredientCount());
-        holder.recipeLikes.setText(recipe.getLikes());
-    }
+
+        final String ID = recipe.getID();
+
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                // Call method for intent
+                Intent intent = new Intent(view.getContext(), RecipeInstructions.class);
+                intent.putExtra("EXTRA_MESSAGE", ID);
+                view.getContext().startActivity(intent);
+            }
+        });
+    };
 
     @Override
     public int getItemCount() {
