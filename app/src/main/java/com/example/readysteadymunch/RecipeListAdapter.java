@@ -1,6 +1,5 @@
 package com.example.readysteadymunch;
 
-import android.app.Application;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -67,7 +66,7 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
             @Override
             public void onClick(View view){
                 // Call method for intent
-                Intent intent = new Intent(view.getContext(), RecipeInstructions.class);
+                Intent intent = new Intent(view.getContext(), RecipeInstructionActivity.class);
                 intent.putExtra("EXTRA_MESSAGE", ID);
                 view.getContext().startActivity(intent);
             }
