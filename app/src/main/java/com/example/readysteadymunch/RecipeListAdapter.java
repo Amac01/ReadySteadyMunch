@@ -49,19 +49,19 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
     @Override
     public void onBindViewHolder (ViewHolder holder, int position) {
         Recipe recipe = recipe_list.get(position);
+        final String ID = recipe.getID();
+        String likes = "Likes: " + recipe.getLikes();
+        String missing_ingredients = "Missing ingredients: " + recipe.getMissedIngredientCount();
+        String used_ingredients = "Used ingredients: " + recipe.getUsedIngredientCount();
+
         holder.recipeTitle.setText(recipe.getTitle());
-
-
         Picasso.get().load(recipe.getImage()).
                 resize(340, 200)
                 .into(holder.recipeImage);
 
-
-        holder.usedIngredientCount.setText(recipe.getUsedIngredientCount());
-        holder.missedIngredientCount.setText(recipe.getMissedIngredientCount());
-
-        final String ID = recipe.getID();
-
+        holder.usedIngredientCount.setText(used_ingredients);
+        holder.missedIngredientCount.setText(missing_ingredients);
+        holder.recipeLikes.setText(likes);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
