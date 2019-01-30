@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -13,9 +13,11 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,9 +44,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
+                    final Intent intent_empty = new Intent(DisplayMessageActivity.this, MainActivity.class);
 
                     @Override
                     public void onResponse(String response) {
+
+                        if (response.length() == 0) {
+
+                            intent_empty.putExtra("empty_response", "empty_response");
+
+                            startActivity(intent_empty);
+                        }
+
+
                         try {
                             JSONArray jsonArray = new JSONArray(response);
                             // System.out.println("Array length is " + jsonArray.length());
@@ -56,16 +68,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
                             }
                             recycle_view_setup(); // Sets up recycle view adapter
                         } catch (JSONException e) {
+
                             e.printStackTrace();
                         }
 
                     }
                 }, new Response.ErrorListener() {
+            final Intent intent_improper = new Intent(DisplayMessageActivity.this, MainActivity.class);
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("That didn't work");
-
+                intent_improper.putExtra("wrong_params", "wrong_params");
+                startActivity(intent_improper);
             }
         }) {
             @Override
