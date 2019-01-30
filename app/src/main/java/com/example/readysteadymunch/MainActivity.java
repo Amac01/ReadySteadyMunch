@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         if (intent.getStringExtra("empty_response") != null) {
             System.out.println(intent.getStringExtra("empty_response"));
+            Toast.makeText(MainActivity.this, "No recipes found for your choices. Try again", Toast.LENGTH_LONG).show();
         }
     }
 

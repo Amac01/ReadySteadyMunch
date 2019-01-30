@@ -1,6 +1,5 @@
 package com.example.readysteadymunch;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -83,7 +82,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("X-RapidAPI-Key", "");
+                headers.put("X-RapidAPI-Key", "706acb9b8fmsh417662e132c35d1p1347afjsn89cf66a51d20");
                 return headers;
             }
         };
