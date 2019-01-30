@@ -7,32 +7,34 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:background="@drawable/rs_munch"
+    android:gravity="center"
     android:tileMode="repeat">
 
 
     <Button
         android:id="@+id/buttonBtn"
         android:layout_width="match_parent"
-        android:layout_height="63dp"
+        android:layout_height="46dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="164dp"
-        android:onClick="sendMessage"
 
+        android:background="@drawable/button_background"
+        android:onClick="sendMessage"
         android:text="Submit"
+        android:textColor="@android:color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ingredientsTxt"
-        app:layout_constraintVertical_bias="0.137" />
+        app:layout_constraintVertical_bias="0.466" />
 
     <EditText
         android:id="@+id/ingredientsTxt"
         android:layout_width="match_parent"
-        android:layout_height="149dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -40,16 +42,38 @@
         android:ems="10"
         android:hint="Enter your ingredients here"
         android:inputType="text"
+        android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textColorHint="#fff"
         android:textSize="24sp"
         android:textStyle="bold"
+        android:background="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105"
-        tools:background="@android:color/white" />
+        app:layout_constraintVertical_bias="0.886" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="297dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:autoText="false"
+        android:singleLine="false"
+        android:text="Find a great recipe by entering your ingredients below"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/ingredientsTxt"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.306"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.462" />
 
 </android.support.constraint.ConstraintLayout>

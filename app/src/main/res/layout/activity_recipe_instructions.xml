@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
     tools:context=".RecipeInstructionActivity">
 
     <ScrollView
@@ -11,7 +12,8 @@
         android:layout_height="715dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        android:background="@color/screen2">
 
         <LinearLayout
             android:layout_width="match_parent"
