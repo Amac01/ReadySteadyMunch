@@ -1,5 +1,6 @@
 package com.example.readysteadymunch;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
-
         //get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String message = intent.getStringExtra("EXTRA_MESSAGE");
@@ -44,22 +44,22 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
                 new Response.Listener<String>() {
-                    final Intent intent_empty = new Intent(DisplayMessageActivity.this, MainActivity.class);
+                    final Intent intent_empty = new Intent(DisplayMessageActivity.this, MainActivity.class)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
                     @Override
                     public void onResponse(String response) {
-
-                        if (response.length() == 0) {
-
-                            intent_empty.putExtra("empty_response", "empty_response");
-
-                            startActivity(intent_empty);
-                        }
-
+                        System.out.println("Inside onResponse method");
+                        System.out.println(response.length());
+                        System.out.println((response.length() == 0));
 
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            // System.out.println("Array length is " + jsonArray.length());
+                            if ((jsonArray.length() == 0)) {
+                                System.out.println("Inside 0 element response");
+                                intent_empty.putExtra("empty_response", "No recipes found!");
+                                startActivity(intent_empty);
+                            }
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject item = (JSONObject) jsonArray.get(i);
                                 recipe_list.add(new Recipe(item.getString("id"), item.getString("title"), item.getString("image"), item.getString("usedIngredientCount"), item.getString("missedIngredientCount"), item.getString("likes")));
@@ -74,13 +74,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
                     }
                 }, new Response.ErrorListener() {
-            final Intent intent_improper = new Intent(DisplayMessageActivity.this, MainActivity.class);
 
             @Override
             public void onErrorResponse(VolleyError error) {
                 System.out.println("That didn't work");
-                intent_improper.putExtra("wrong_params", "wrong_params");
-                startActivity(intent_improper);
             }
         }) {
             @Override
