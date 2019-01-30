@@ -85,17 +85,17 @@ public class RecipeInstructionActivity extends AppCompatActivity {
         String complete_ingredients = "";
         String complete_instructions = "";
         String complete_nutrition = "Ready in minutes: " + recipe_instructions.getReadyInMinutes() +
-                " minutes" +
-                " Vegetarian: " + recipe_instructions.isVegetarian() +
-                " Vegan: " + recipe_instructions.isVegan() +
-                " Gluten Free: " + recipe_instructions.isGlutenFree() +
-                " Dairy Free: " + recipe_instructions.isDairyFree() +
-                " Serves: " + recipe_instructions.getServings();
+                " minutes\n" +
+                "\nVegetarian: " + recipe_instructions.isVegetarian() +
+                "\nVegan: " + recipe_instructions.isVegan() +
+                "\nGluten Free: " + recipe_instructions.isGlutenFree() +
+                "\nDairy Free: " + recipe_instructions.isDairyFree() +
+                "\nServes: " + recipe_instructions.getServings();
         for (String element: recipe_instructions.getIngredients()){
-            complete_ingredients += element + " /n";
+            complete_ingredients += element + " \n";
         }
         for (String element: recipe_instructions.getInstructions()){
-            complete_instructions += element + " /n";
+            complete_instructions += element + " \n";
         }
         System.out.println(complete_ingredients);
         System.out.println(complete_instructions);
@@ -128,12 +128,17 @@ public class RecipeInstructionActivity extends AppCompatActivity {
             // Adds instructions to recipe_instructions arraylist
 
             JSONArray analysedInstructions = item.getJSONArray("analyzedInstructions");
+            System.out.println("analysed instructions" + analysedInstructions);
             JSONObject name_and_steps = (JSONObject) analysedInstructions.get(0);
+            System.out.println("name and steps" + name_and_steps);
             JSONArray steps = name_and_steps.getJSONArray("steps");
+            System.out.println("Steps array:" + steps);
 
             for (int i = 0; i < steps.length(); i++){
-                JSONObject individual_instruction = (JSONObject) steps.get(0);
+                JSONObject individual_instruction = (JSONObject) steps.get(i);
                 String instruction = individual_instruction.getString("step");
+                System.out.println("Individual instruction" + instruction);
+                System.out.println("Place in loop:" + i);
                 recipe_instructions.addInstructions(instruction);
             }
 
@@ -145,8 +150,8 @@ public class RecipeInstructionActivity extends AppCompatActivity {
             System.out.println(recipe_instructions.isGlutenFree());
             System.out.println(recipe_instructions.isDairyFree());
             System.out.println(recipe_instructions.getServings());
-            System.out.println(recipe_instructions.getIngredients().size());
-            System.out.println(recipe_instructions.getInstructions().size());
+            System.out.println(recipe_instructions.getIngredients());
+            System.out.println(recipe_instructions.getInstructions());
 
         } catch (JSONException e) {
             e.printStackTrace();
