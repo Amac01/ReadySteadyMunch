@@ -30,6 +30,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
+        /*
+
 
         //get the Intent that started this activity and extract the string
         Intent intent = getIntent();
@@ -78,6 +80,14 @@ public class DisplayMessageActivity extends AppCompatActivity {
         // Pass the API call into a Recipe List
 
         queue.add(stringRequest);
+        */
+
+
+        // Create recipe object and put into recipe__list
+        Recipe recipe = new Recipe("234543", "Hello", "https://unsplash.com/photos/ocnsb17U6FE", "2345", "345", "345");
+        recipe_list.add(recipe); // Pass in recipe object
+        recycle_view_setup();
+
 
 
     }
