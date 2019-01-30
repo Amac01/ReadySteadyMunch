@@ -30,7 +30,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
-
         //get the Intent that started this activity and extract the string
         Intent intent = getIntent();
         String message = intent.getStringExtra("EXTRA_MESSAGE");
@@ -51,14 +50,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject item = (JSONObject) jsonArray.get(i);
                                 recipe_list.add(new Recipe(item.getString("id"), item.getString("title"), item.getString("image"), item.getString("usedIngredientCount"), item.getString("missedIngredientCount"), item.getString("likes")));
-                                // System.out.println(recipe_list.get(0).getImage());
-
                             }
                             recycle_view_setup(); // Sets up recycle view adapter
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
 
@@ -75,15 +71,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 return headers;
             }
         };
-        // Pass the API call into a Recipe List
 
+        // Pass the API call into the queue List
         queue.add(stringRequest);
-
-
     }
     protected void recycle_view_setup(){
         // Recycler View
-        System.out.println(recipe_list.size());
         RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(recipe_list); // Add the list
         RecyclerView recipe_view = findViewById(R.id.recipe_by_ingredient);
         recipe_view.setHasFixedSize(true);

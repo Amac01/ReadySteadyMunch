@@ -136,10 +136,13 @@ public class RecipeInstructionActivity extends AppCompatActivity {
 
             for (int i = 0; i < steps.length(); i++){
                 JSONObject individual_instruction = (JSONObject) steps.get(i);
+                int instruction_number = individual_instruction.getInt("number");
                 String instruction = individual_instruction.getString("step");
+                System.out.println("Individual instruction number" + instruction_number);
                 System.out.println("Individual instruction" + instruction);
                 System.out.println("Place in loop:" + i);
-                recipe_instructions.addInstructions(instruction);
+                String name_and_instruction = instruction_number + ". " + instruction;
+                recipe_instructions.addInstructions(name_and_instruction);
             }
 
             System.out.println(recipe_instructions.getTitle());
