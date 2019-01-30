@@ -3,6 +3,8 @@ package com.example.readysteadymunch;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -11,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -36,8 +39,6 @@ public class RecipeInstructionActivity extends AppCompatActivity {
         String recipe_id = "ids=" + id;
         String parameters = "&includeNutrition=true";
         String complete_url = start_url + recipe_id + parameters;
-
-        // Current API: https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/informationBulk?ids=835677&includeNutrition=true
 
         StringRequest stringRequest = new StringRequest(Request.Method.GET, complete_url,
                 new Response.Listener<String>() {
@@ -74,7 +75,33 @@ public class RecipeInstructionActivity extends AppCompatActivity {
     }
 
     protected void setUpViews() {
-        // Add code to setup the views
+        TextView recipe_title = findViewById(R.id.recipe_title);
+        ImageView recipe_picture = findViewById(R.id.recipe_picture);
+        TextView recipe_ingredients = findViewById(R.id.recipe_ingredients);
+        TextView recipe_nutrition = findViewById(R.id.recipe_nutrition);
+        TextView recipe_complete_instructions = findViewById(R.id.recipe_instructions);
+        recipe_title.setText(recipe_instructions.getTitle());
+        Picasso.get().load(recipe_instructions.getImage()).resize(340, 200).into(recipe_picture);
+        String complete_ingredients = "";
+        String complete_instructions = "";
+        String complete_nutrition = "Ready in minutes: " + recipe_instructions.getReadyInMinutes() +
+                " minutes" +
+                " Vegetarian: " + recipe_instructions.isVegetarian() +
+                " Vegan: " + recipe_instructions.isVegan() +
+                " Gluten Free: " + recipe_instructions.isGlutenFree() +
+                " Dairy Free: " + recipe_instructions.isDairyFree() +
+                " Serves: " + recipe_instructions.getServings();
+        for (String element: recipe_instructions.getIngredients()){
+            complete_ingredients += element + " /n";
+        }
+        for (String element: recipe_instructions.getInstructions()){
+            complete_instructions += element + " /n";
+        }
+        System.out.println(complete_ingredients);
+        System.out.println(complete_instructions);
+        recipe_ingredients.setText(complete_ingredients);
+        recipe_nutrition.setText(complete_nutrition);
+        recipe_complete_instructions.setText(complete_instructions);
     }
 
     protected void jsonToJava(JSONArray json_array) {
@@ -109,6 +136,17 @@ public class RecipeInstructionActivity extends AppCompatActivity {
                 String instruction = individual_instruction.getString("step");
                 recipe_instructions.addInstructions(instruction);
             }
+
+            System.out.println(recipe_instructions.getTitle());
+            System.out.println(recipe_instructions.getImage());
+            System.out.println(recipe_instructions.getReadyInMinutes());
+            System.out.println(recipe_instructions.isVegetarian());
+            System.out.println(recipe_instructions.isVegan());
+            System.out.println(recipe_instructions.isGlutenFree());
+            System.out.println(recipe_instructions.isDairyFree());
+            System.out.println(recipe_instructions.getServings());
+            System.out.println(recipe_instructions.getIngredients().size());
+            System.out.println(recipe_instructions.getInstructions().size());
 
         } catch (JSONException e) {
             e.printStackTrace();
