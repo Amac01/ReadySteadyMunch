@@ -13,10 +13,13 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/screen3"
         android:text=""
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textSize="24sp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/recipe_by_ingredient"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,8 +30,10 @@
         android:id="@+id/recipe_by_ingredient"
         android:layout_width="395dp"
         android:layout_height="627dp"
+        android:background="@color/screen3"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="96dp" />
+        tools:layout_editor_absoluteY="115dp" />
 </android.support.constraint.ConstraintLayout>
 

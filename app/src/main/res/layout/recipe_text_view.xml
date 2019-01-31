@@ -30,7 +30,9 @@
                 android:layout_gravity="bottom"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="cursive"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:fontFamily="Roboto"
                 />
 
             <ImageView
@@ -46,7 +48,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:fontFamily="Roboto"
                 />
             <TextView
                 android:id="@+id/missedIngredientCount"
@@ -54,7 +58,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:fontFamily="Roboto"
                 />
             <TextView
                 android:id="@+id/recipeLikes"
@@ -62,7 +68,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:fontFamily="serif"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:fontFamily="Roboto"
                 />
 
         </LinearLayout>
