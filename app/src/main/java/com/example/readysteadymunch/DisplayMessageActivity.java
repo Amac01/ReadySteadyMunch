@@ -67,7 +67,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("X-RapidAPI-Key", "");
+                headers.put("X-RapidAPI-Key", "f");
                 return headers;
             }
         };
