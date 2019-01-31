@@ -25,18 +25,18 @@ import java.util.Map;
 
 
 public class DisplayMessageActivity extends AppCompatActivity {
-    public List<Recipe> recipe_list = new ArrayList<>(); // Variable to store our recipes
+    public List<Recipe> recipe_list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
 
-        //get the Intent that started this activity and extract the string
+
         Intent intent = getIntent();
         String message = intent.getStringExtra("EXTRA_MESSAGE");
 
-        //API call
+
         RequestQueue queue = Volley.newRequestQueue(this);
         String ingredientCall = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?number=5&ranking=1&ingredients=" + message;
         String url = ingredientCall;
@@ -63,7 +63,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                                 JSONObject item = (JSONObject) jsonArray.get(i);
                                 recipe_list.add(new Recipe(item.getString("id"), item.getString("title"), item.getString("image"), item.getString("usedIngredientCount"), item.getString("missedIngredientCount"), item.getString("likes")));
                             }
-                            recycle_view_setup(); // Sets up recycle view adapter
+                            recycle_view_setup();
                         } catch (JSONException e) {
 
                             e.printStackTrace();
@@ -79,17 +79,17 @@ public class DisplayMessageActivity extends AppCompatActivity {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> headers = new HashMap<>();
-                headers.put("X-RapidAPI-Key", "");
+                headers.put("X-RapidAPI-Key", "706acb9b8fmsh417662e132c35d1p1347afjsn89cf66a51d20");
                 return headers;
             }
         };
 
-        // Pass the API call into the queue List
+
         queue.add(stringRequest);
     }
     protected void recycle_view_setup(){
-        // Recycler View
-        RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(recipe_list); // Add the list
+
+        RecipeListAdapter recipe_list_adapter = new RecipeListAdapter(recipe_list);
         RecyclerView recipe_view = findViewById(R.id.recipe_by_ingredient);
         recipe_view.setHasFixedSize(true);
         recipe_view.setLayoutManager(new LinearLayoutManager(this));
