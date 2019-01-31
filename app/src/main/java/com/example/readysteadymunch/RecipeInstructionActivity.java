@@ -45,12 +45,12 @@ public class RecipeInstructionActivity extends AppCompatActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        // System.out.println(response);
+
                         try {
                             JSONArray jsonArray = new JSONArray(response);
-                            // System.out.println("Array length is " + jsonArray.length()); // Debugging purposes
-                            jsonToJava(jsonArray); // Handles wrapping into Java objects
-                            setUpViews(); // This sets up the views
+
+                            jsonToJava(jsonArray);
+                            setUpViews();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -108,24 +108,24 @@ public class RecipeInstructionActivity extends AppCompatActivity {
         try {
             JSONObject item = (JSONObject) json_array.get(0);
 
-            recipe_instructions.setTitle(item.getString("title")); // Set recipe title
-            recipe_instructions.setImage(item.getString("image")); // Set recipe image
-            recipe_instructions.setReadyInMinutes(item.getInt("readyInMinutes")); // Set recipe ready in minutes
-            recipe_instructions.setVegetarian(item.getBoolean("vegetarian")); // Set recipe vegetarian
-            recipe_instructions.setVegan(item.getBoolean("vegan")); // Set recipe vegan
-            recipe_instructions.setGlutenFree(item.getBoolean("glutenFree")); // Set recipe glutenFree
-            recipe_instructions.setDairyFree(item.getBoolean("dairyFree")); // Set recipe dairyFree
-            recipe_instructions.setServings(item.getInt("servings")); // Set recipe servings
+            recipe_instructions.setTitle(item.getString("title"));
+            recipe_instructions.setImage(item.getString("image"));
+            recipe_instructions.setReadyInMinutes(item.getInt("readyInMinutes"));
+            recipe_instructions.setVegetarian(item.getBoolean("vegetarian"));
+            recipe_instructions.setVegan(item.getBoolean("vegan"));
+            recipe_instructions.setGlutenFree(item.getBoolean("glutenFree"));
+            recipe_instructions.setDairyFree(item.getBoolean("dairyFree"));
+            recipe_instructions.setServings(item.getInt("servings"));
 
-            JSONArray ingredients_array = item.getJSONArray("extendedIngredients"); // Returns ingredients array
-            // Adds ingredients to recipe_instructions arraylist
+            JSONArray ingredients_array = item.getJSONArray("extendedIngredients");
+
             for (int i = 0; i < ingredients_array.length(); i++){
                 JSONObject individual_ingredient = (JSONObject) ingredients_array.get(i);
                 String ingredient = individual_ingredient.getString("originalString");
                 recipe_instructions.addIngredients(ingredient);
             }
 
-            // Adds instructions to recipe_instructions arraylist
+
 
             JSONArray analysedInstructions = item.getJSONArray("analyzedInstructions");
             System.out.println("analysed instructions" + analysedInstructions);

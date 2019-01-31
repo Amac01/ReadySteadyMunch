@@ -28,12 +28,14 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recipe_by_ingredient"
-        android:layout_width="395dp"
-        android:layout_height="627dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"
         android:background="@color/screen3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="115dp" />
+        tools:ignore="MissingConstraints" />
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.0"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--tools:layout_editor_absoluteY="115dp" />-->
 </android.support.constraint.ConstraintLayout>
 
